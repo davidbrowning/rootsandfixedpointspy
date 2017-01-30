@@ -32,13 +32,15 @@ def half_interval_method(f, a, b):
     else:
         raise Exception('Values are not of oppositive sign')
 
-#def fixed_point(f, guess, error=0.0000000000001):
-#    prev_guess = guess
-#    curr_guess = f(prev_guess)
-#    num_iters = 0
-#    while not close_enough(prev_guess, curr_guess, error=error):
-#        ## your code here
-#    return (num_iters, curr_guess)
+def fixed_point(f, guess, error=0.0000000000001):
+    prev_guess = guess
+    curr_guess = f(prev_guess)
+    num_iters = 0
+    while not close_enough(prev_guess, curr_guess, error=error):
+        prev_guess = curr_guess
+        curr_guess = f(curr_guess)
+        num_iters += 1
+    return (num_iters, curr_guess)
 
 def fixed_point_sqrt(x):
     return fixed_point(lambda y: (y + x/y)/2, 1.0)
@@ -47,14 +49,15 @@ def fixed_point_golden_ratio():
     return fixed_point(lambda x: 1 + 1/x, 1.0)
 
 def fixed_point_golden_ratio_with_avrg_damping():
-    ## your one line of code here
+    return fixed_point(lambda x: (x + 1 + 1/x)/2, 1.0)
     pass
 
 def fixed_point_log(y, guess):
-    ## your one line of code here
+    return fixed_point(lambda x:  y**(1/x), guess)
     pass
 
 def fixed_point_log_with_avrg_damping(y, guess):
+    return fixed_point(lambda x: (x + y**(1/x))/2 , guess)
     ## your one line of code here
     pass
 
@@ -62,10 +65,7 @@ def fixed_point_logs_with_avrg_damping(x, y, guess):
     ## your one line of code here
     pass
 
-
-
-
-                     
-
-    
-
+##F1: Returned none type
+##F2: 27.32050928255947
+##F3: -1.4908409440295145e-07
+##F4: -3.638441885556176e-07
